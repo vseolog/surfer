@@ -28,7 +28,7 @@ func _physics_process(delta):
 
 
 func _input(event):
-	if event is InputEventMouseButton and event.is_pressed() and 	event.button_index == 1:
+	if event is InputEventMouseButton and event.is_pressed() and event.button_index == 1:
 		var event_x_position = float(event.get_position().x)
 		var event_y_position = float(event.get_position().y)
 		print('wave created')
