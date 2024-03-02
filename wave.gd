@@ -1,6 +1,6 @@
 extends Line2D
 
-var number_of_points = 100
+var number_of_points = 500
 var screen_leight = 1000
 var screen_widght = 600
 var y_position = 200.0
@@ -20,9 +20,10 @@ func _ready():
 func _physics_process(delta):
 	for j in array:
 		if j.id != 0 and j.id < len(array)-1:
+			j.h = get_point_position(j.id).y
 			var p = array[j.id-1]
 			var n = array[j.id+1]
-			j.v = ((p.h - j.h) + (n.h - j.h)) * delta
+			j.v = ((p.h - j.h) + (n.h - j.h)) * delta*50
 		if j.v != 0:
 			set_point_position(j.id, Vector2(get_point_position(j.id).x, (j.h + (j.v * delta))))
 
