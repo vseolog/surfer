@@ -11,18 +11,21 @@ var array = []
 func _ready():
 	var point = load('res://point.gd')
 	for i in range(1, number_of_points+1):
-		var a = point.new(i)
-		array.append(a)
 		var x_position = i*(screen_leight/number_of_points)
 		add_point(Vector2(x_position, y_position), i)
+		var a = point.new(i)
+		array.append(a)
 
-#func _process(delta):        # комп капец жёстко гудит если это включить
-#	for j in array:
-#		while j.id < len(array):
-#			if j.h != 0:
-#				var p = array[j.id-1]
-#				var n = array[j.id+1]
-#				j.v = k * ((p.h - j.h) + (n.h - j.h))
+
+func _physics_process(delta):
+	for j in array:
+		if j.id != 0 and j.id < len(array)-1:
+			var p = array[j.id-1]
+			var n = array[j.id+1]
+			j.v = ((p.h - j.h) + (n.h - j.h)) * delta
+		if j.v != 0:
+			set_point_position(j.id, Vector2(get_point_position(j.id).x, (j.h + (j.v * delta))))
+
 
 func _input(event):
 	if event is InputEventMouseButton and event.is_pressed() and 	event.button_index == 1:
