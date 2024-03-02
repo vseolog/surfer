@@ -6,6 +6,7 @@ var v = 0
 
 func _init(_id):
 	id = _id
+	h = y_position
 
 func _physics_process(delta):
 	h = get_point_position(id).y + 200
